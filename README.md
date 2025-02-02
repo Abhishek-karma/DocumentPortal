@@ -87,6 +87,21 @@ docportal/
 ├── package.json                      // Project metadata and dependencies
 └── README.md                         // This documentation file
 ```
+## Frontend
+
+The frontend of **DocPortal** is built using the following technologies:
+
+- **React**: For building interactive user interfaces.
+- **Tailwind CSS**: For utility-first styling.
+- **Vite**: As the build tool for fast development.
+- **React Router**: For handling routing and navigation.
+- **Axios**: For making API requests to the backend.
+
+### Features:
+- **User Dashboard**: View and manage documents.
+- **Document Upload**: Upload documents and store them securely.
+- **Sharing**: Share documents with other users with configurable permissions.
+- **Responsive Design**: The interface is designed to be responsive across devices.
 
 ## Installation
 
