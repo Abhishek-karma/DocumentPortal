@@ -1,5 +1,3 @@
-// mail/emailTemplates.js
-
 const generateVerificationEmail = (verificationCode) => {
     return `
       <html lang="en">

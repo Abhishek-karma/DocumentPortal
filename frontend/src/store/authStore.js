@@ -33,6 +33,7 @@ export const useAuthStore = create((set) => ({
 				error: null,
 				isLoading: false,
 			});
+			localStorage.setItem("user", JSON.stringify(response.data.user));
 		} catch (error) {
 			set({ error: error.response?.data?.message || "Error logging in", isLoading: false });
 			throw error;

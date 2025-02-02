@@ -1,6 +1,6 @@
-import multer from 'multer';
+import multer from "multer";
 
-const storage = multer.memoryStorage(); // Store file in memory before uploading to Cloudinary
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage,

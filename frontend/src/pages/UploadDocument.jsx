@@ -15,15 +15,19 @@ const UploadDocument = ({ setDocuments }) => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/documents/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/documents/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setDocuments((prev) => [...prev, response.data]);
       setFile(null);
-      toast.success("Document uploaded successfully!");  // Success Toast
+      toast.success("Document uploaded successfully!");
     } catch (error) {
       console.error("Error uploading document:", error);
-      toast.error("Failed to upload document!");  // Error Toast
+      toast.error("Failed to upload document!");
     }
   };
 
@@ -34,7 +38,6 @@ const UploadDocument = ({ setDocuments }) => {
       transition={{ delay: 0.6 }}
       className="p-4 bg-gray-800 bg-opacity-50 rounded-lg border border-gray-700"
     >
-      {/* <h3 className="text-xl font-semibold text-green-400 mb-3">Upload Document</h3> */}
       <input
         type="file"
         onChange={handleFileChange}

@@ -1,33 +1,34 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-    email:{
-        type: String,
-        required: true,
-        unique: true
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    password:{
-        type:String,
-        required: true
+    password: {
+      type: String,
+      required: true,
     },
-    name:{
-        type: String, 
-        required: true
+    name: {
+      type: String,
+      required: true,
     },
-    lastLogin:{
-         type: Date, 
-         default:Date.now()
+    lastLogin: {
+      type: Date,
+      default: Date.now(),
     },
-    isVerified:{
-        type:Boolean, 
-        default:false
+    isVerified: {
+      type: Boolean,
+      default: false,
     },
-    resetPasswordToken:String,
-    resetPasswordExpiresAt:Date,
+    resetPasswordToken: String,
+    resetPasswordExpiresAt: Date,
     verificationToken: String,
-    verificationTokenExpireAt: Date
-},{timestamps: true})
+    verificationTokenExpireAt: Date,
+  },
+  { timestamps: true }
+);
 
 export const User = mongoose.model("User", userSchema);
-
-

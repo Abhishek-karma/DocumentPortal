@@ -4,8 +4,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import DocumentList from "./DocumentList";
 import UploadDocument from "./UploadDocument";
+import ViewSharedDocument from "../pages/ViewSharedDocuments";
 import { formatDate } from "../utils/date";
-import { FileText, User, Activity, UploadCloud, LogOut } from "lucide-react";
+import {
+  FileText,
+  User,
+  Activity,
+  UploadCloud,
+  LogOut,
+  Share2,
+} from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const DashboardPage = () => {
@@ -79,11 +87,12 @@ const DashboardPage = () => {
               <h2 className="text-xl font-semibold text-gray-100">Profile</h2>
             </div>
             <div className="space-y-4 text-gray-300">
-              <p><span className="font-medium">Name:</span> {user.name}</p>
-              <p><span className="font-medium">Email:</span> {user.email}</p>
-              {user.aadhaarNumber && (
-                <p><span className="font-medium">Aadhaar:</span> {user.verifiedAadhaar ? "Verified" : "Pending Verification"}</p>
-              )}
+              <p>
+                <span className="font-medium">Name:</span> {user.name}
+              </p>
+              <p>
+                <span className="font-medium">Email:</span> {user.email}
+              </p>
             </div>
           </motion.div>
 
@@ -98,7 +107,9 @@ const DashboardPage = () => {
               <div className="p-3 bg-blue-500/20 rounded-lg">
                 <Activity className="text-blue-400" size={24} />
               </div>
-              <h2 className="text-xl font-semibold text-gray-100">Recent Activity</h2>
+              <h2 className="text-xl font-semibold text-gray-100">
+                Recent Activity
+              </h2>
             </div>
             <div className="space-y-4 text-gray-300">
               <p>
@@ -131,37 +142,57 @@ const DashboardPage = () => {
               <div className="p-3 bg-purple-500/20 rounded-lg">
                 <UploadCloud className="text-purple-400" size={24} />
               </div>
-              <h2 className="text-xl font-semibold text-gray-100">Upload Documents</h2>
+              <h2 className="text-xl font-semibold text-gray-100">
+                Upload Documents
+              </h2>
             </div>
             <UploadDocument setDocuments={setDocuments} />
           </motion.div>
         </div>
 
-        {/* Document List Section */}
+        {/* Document List & Shared Documents (Side by Side on Large Screens) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12"
+          transition={{ delay: 1 }}
+          className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-amber-500/20 rounded-lg">
-              <FileText className="text-amber-400" size={24} />
+          {/* Your Documents */}
+          <div className="flex flex-col">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-amber-500/20 rounded-lg">
+                <FileText className="text-amber-400" size={24} />
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-100">
+                Your Documents
+              </h2>
             </div>
-            <h2 className="text-2xl font-semibold text-gray-100">Your Documents</h2>
+
+            {loading ? (
+              <div className="flex justify-center py-12">
+                <LoadingSpinner size="lg" />
+              </div>
+            ) : error ? (
+              <div className="p-4 bg-red-500/10 text-red-300 rounded-lg">
+                {error}
+              </div>
+            ) : (
+              <DocumentList documents={documents} setDocuments={setDocuments} />
+            )}
           </div>
-          
-          {loading ? (
-            <div className="flex justify-center py-12">
-              <LoadingSpinner size="lg" />
+
+          {/* Shared Documents */}
+          <div className="flex flex-col">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-blue-500/20 rounded-lg">
+                <Share2 className="text-blue-400" size={24} />
+              </div>
+              <h2 className="text-2xl font-semibold text-gray-100">
+                Received Documents
+              </h2>
             </div>
-          ) : error ? (
-            <div className="p-4 bg-red-500/10 text-red-300 rounded-lg">
-              {error}
-            </div>
-          ) : (
-            <DocumentList documents={documents} setDocuments={setDocuments} />
-          )}
+            <ViewSharedDocument />
+          </div>
         </motion.div>
       </div>
     </motion.div>
