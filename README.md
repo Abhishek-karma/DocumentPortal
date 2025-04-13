@@ -1,4 +1,3 @@
-Below is the final `README.md` file for your DocPortal project:
 
 ---
 
